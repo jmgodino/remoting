@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+<log4j:configuration>
+ <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+   <layout class="org.apache.log4j.PatternLayout">
+     <param name="ConversionPattern" value="%d{ABSOLUTE} 
+      %5p %c{1}: line %L - %m%n"/>
+	</layout>
+ </appender>
+ 
+ <category name="com.catastro.*">
+    <level value="debug"/>
+ </category>
+ 
+<category name="org.apache.fop.*">
+    <level value="error"/>
+ </category> 
+ 
+ <root>
+	<priority value="info"></priority>
+	<appender-ref ref="stdout"/>
+ </root> 
+</log4j:configuration>
