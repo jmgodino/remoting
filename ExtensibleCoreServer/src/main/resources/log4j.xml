@@ -8,14 +8,6 @@
 	</layout>
  </appender>
  
- <category name="com.catastro.*">
-    <level value="debug"/>
- </category>
- 
-<category name="org.apache.fop.*">
-    <level value="error"/>
- </category> 
- 
  <root>
 	<priority value="info"></priority>
 	<appender-ref ref="stdout"/>
