@@ -21,7 +21,8 @@ public class PDFPlugin implements PDFService {
 	@Override
 	public PDFBuffer generarPDF(String xml, String transformer) {
 		try {
-        	TransletProcessor trans = new TransletProcessor(transformer);
+
+			TransletProcessor trans = new TransletProcessor(transformer);
         	byte[] pdfContent = trans.transform(xml);
         	return new PDFBuffer(pdfContent);
         	
