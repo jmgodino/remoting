@@ -21,11 +21,9 @@ public class PDFPlugin implements PDFService {
 	@Override
 	public PDFBuffer generarPDF(String xml, String transformer) {
 		try {
-
 			TransletProcessor trans = new TransletProcessor(transformer);
         	byte[] pdfContent = trans.transform(xml);
         	return new PDFBuffer(pdfContent);
-        	
         } catch (Exception e) {
         	log.error("Error en la generacion del PDF", e);
 			throw new PDFServiceException("Error en el plugin de PDF-FOP", e);
