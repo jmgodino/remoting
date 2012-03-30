@@ -1,5 +1,7 @@
 package es.gob.catastro.service.core.inspector;
 
+import java.text.DecimalFormat;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -10,9 +12,11 @@ public class TraceServerInfo implements Runnable {
 
 	private static final Log log = LogFactory.getLog(TraceServerInfo.class);
 	private long interval;
+	private DecimalFormat fmt;
 
 	public TraceServerInfo() {
 		super();
+		fmt = (DecimalFormat)DecimalFormat.getInstance(new Locale("es","ES"));
 		ExecutorService exec = Executors.newSingleThreadExecutor();
 		exec.execute(this);
 	}
@@ -34,7 +38,7 @@ public class TraceServerInfo implements Runnable {
 		long totalMem = Runtime.getRuntime().totalMemory();
 		double porcentaje = 100 * ((double) freeMem / (double) totalMem);
 
-		log.info("Memoria libre: " + freeMem + "bytes de " + totalMem + "bytes reservados -> " + porcentaje + "%");
+		log.info("Memoria libre: " + fmt.format(freeMem) + " bytes de " + fmt.format(totalMem) + " bytes reservados -> " + fmt.format(porcentaje) + "%");
 	}
 
 	@Override
