@@ -9,6 +9,16 @@ import es.gob.catastro.service.rmi.client.util.RmiLocation;
 
 public class RmiClient<T> {
 
+	private Integer retries=3;
+	
+	public Integer getRetries() {
+		return retries;
+	}
+
+	public void setRetries(Integer retries) {
+		this.retries = retries;
+	}
+
 	public T getService(List<RmiLocation> urls, String name) {
 		
 		if (urls == null || urls.size() == 0) {

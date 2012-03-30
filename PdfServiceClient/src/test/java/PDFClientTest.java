@@ -12,7 +12,7 @@ public class PDFClientTest {
 		final String transformer = args[1];
 		final String filePdf = args[2];
 		final Random rnd = new Random();
-		ExecutorService pool = Executors.newFixedThreadPool(10);
+		ExecutorService pool = Executors.newFixedThreadPool(5);
 		
 		for (int i=0; i<100; i++) {
 
@@ -21,6 +21,7 @@ public class PDFClientTest {
 				@Override
 				public void run() {
 					PDFClientSqlite client = new PDFClientSqlite();
+					client.setRetries(2);
 					try {
 						FileHelper.writeFile(filePdf+rnd.nextInt(10000)+".pdf", client.generarPDF(FileHelper.readFile(fileXml), transformer).getContent());
 					} catch (Exception e) {

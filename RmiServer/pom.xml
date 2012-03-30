@@ -46,7 +46,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>libraries/</classpathPrefix>
-							<mainClass>es.gob.catastro.service.rmi.server.Server</mainClass>
+							<mainClass>es.gob.catastro.service.core.server.Server</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

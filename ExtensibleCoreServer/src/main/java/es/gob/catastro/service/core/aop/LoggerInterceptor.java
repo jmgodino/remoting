@@ -1,4 +1,4 @@
-package es.gob.catastro.service.aop;
+package es.gob.catastro.service.core.aop;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
