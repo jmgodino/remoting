@@ -30,8 +30,8 @@
  	</bean>
  	
     <bean id="loggerAccessControl" class="es.gob.catastro.service.core.logging.LogPluginConfiguration" init-method="configure">
-    	<property name="logFile" value="d:/docs/logs/statistics.txt"/>
-    	<property name="pattern" value="es.gob.catastro.service"/>
+    	<property name="logFile" value="d:/docs/logs/core.txt"/>
+    	<property name="pattern" value="es.gob.catastro.service.core"/>
     	<property name="level" value="INFO"/>
     	<property name="format" value="%d{dd/MM/yyyy HH:mm:ss} - %m%n" />
     	<property name="buffered" value="false" />

@@ -14,13 +14,13 @@
     </bean>
     
     <bean id="loggerPdfServiceImpl" class="es.gob.catastro.service.core.logging.LogPluginConfiguration" init-method="configure">
-    	<property name="logFile" value="d:/docs/logs/output.txt"/>
+    	<property name="logFile" value="d:/docs/logs/pdfplugin-output.txt"/>
     	<property name="pattern" value="es.gob.catastro.service.rmi.pdf"/>
     	<property name="level" value="INFO"/>
     </bean>
     
     <bean id="loggerFop" class="es.gob.catastro.service.core.logging.LogPluginConfiguration" init-method="configure">
-    	<property name="logFile" value="d:/docs/logs/fop-output.txt"/>
+    	<property name="logFile" value="d:/docs/logs/pdfplugin-fop-output.txt"/>
     	<property name="pattern" value="org.apache"/>
     	<property name="level" value="ERROR"/>
     </bean>    
