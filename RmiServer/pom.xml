@@ -6,7 +6,7 @@
     <groupId>es.gob.catastro.service.server</groupId>
     <artifactId>RmiServer</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
   	<parent>
 		<groupId>es.gob.catastro.project</groupId>
@@ -56,15 +56,15 @@
 
 
     <dependencies>
-		<dependency>
-			<groupId>es.gob.catastro.service</groupId>
-			<artifactId>PdfServiceImpl</artifactId>
-			<version>1.0-SNAPSHOT</version>		
-		</dependency>	
+	    <dependency>
+		<groupId>es.gob.catastro.service</groupId>
+		<artifactId>PdfServiceImpl</artifactId>
+		<version>1.0</version>    
+    </dependency>
 		<dependency>
 			<groupId>es.gob.catastro.service.server</groupId>
 			<artifactId>ExtensibleCoreServer</artifactId>
-			<version>1.0-SNAPSHOT</version>		
+			<version>1.0</version>		
 		</dependency>
     </dependencies>
 	
