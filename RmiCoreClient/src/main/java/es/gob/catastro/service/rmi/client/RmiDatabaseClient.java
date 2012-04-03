@@ -15,7 +15,7 @@ public abstract class RmiDatabaseClient<T> extends RmiClient<T> {
 	public T getService(String name) {
 		
 		List<RmiLocation> urls = getUrls();
-		for (int i = 0; i < getRetries(); i++) {
+		for (int i = 1; i <= getRetries(); i++) {
 			try {
 				return getRandomHostService(urls, name);				
 			} catch (Exception e) {
