@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.sqlite.SQLiteConfig;
+
 import es.gob.catastro.service.pdf.PDFService;
 
 import es.gob.catastro.service.rmi.pdf.client.PDFClient;
@@ -16,7 +18,9 @@ public class PDFClientSqlite extends PDFClient implements PDFService {
 	@Override
 	protected Connection getConnection() throws SQLException, ClassNotFoundException {
 		Class.forName("org.sqlite.JDBC");
-		return DriverManager.getConnection("jdbc:sqlite:"+System.getProperty("sqlite.datafile"));
+		SQLiteConfig config = new SQLiteConfig();
+		config.setReadOnly(true);
+		return DriverManager.getConnection("jdbc:sqlite:"+System.getProperty("sqlite.datafile"), config.toProperties());
 	}
 	
 	@Override
