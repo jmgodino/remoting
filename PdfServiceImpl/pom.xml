@@ -6,45 +6,44 @@
 	<packaging>jar</packaging>
 	<version>1.0</version>
 
-  	<parent>
+	<parent>
 		<groupId>es.gob.catastro.project</groupId>
-		<artifactId>NexusProject</artifactId>
+		<artifactId>DistributableProject</artifactId>
 		<version>1.0-SNAPSHOT</version>
-	</parent>	
-	
+	</parent>
+
 	<build>
 		<plugins>
 			<plugin>
-			  <groupId>es.gob.catastro.maven.plugin</groupId>
-			  <artifactId>maven-xsltc-plugin</artifactId>
-			  <version>1.0-SNAPSHOT</version>
-			  <executions>
-		          <execution>
-		            <phase>compile</phase>
-		            <goals>
-		              <goal>xsltc</goal>
-		            </goals>
-		          </execution>
-		        </executions>
-		        <configuration>
-		        	<packageName>es.gob.catastro.service.rmi.pdf.server.translet</packageName>
-		        	<outputDirectory>${project.build.outputDirectory}</outputDirectory>
-		        	<stylesheets>
-		        		<param>${basedir}/src/main/resources/stylesheets/Anexo.xsl</param>
-		        	</stylesheets>
-		        </configuration>
+				<groupId>es.gob.catastro.maven.plugin</groupId>
+				<artifactId>maven-xsltc-plugin</artifactId>
+				<version>1.0-SNAPSHOT</version>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>xsltc</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<packageName>es.gob.catastro.service.rmi.pdf.server.translet</packageName>
+					<outputDirectory>${project.build.outputDirectory}</outputDirectory>
+					<stylesheets>
+						<param>${basedir}/src/main/resources/stylesheets/Anexo.xsl</param>
+					</stylesheets>
+				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>			
+			</plugin>
+
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+			</plugin>
+
+
 		</plugins>
 
 		<resources>
@@ -92,7 +91,7 @@
 			<groupId>xml-apis</groupId>
 			<artifactId>xml-apis</artifactId>
 			<scope>provided</scope>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
@@ -117,6 +116,8 @@
 
 	<properties>
 		<java.version>1.6</java.version>
+		<distributable.plugin.name>plugin/fop</distributable.plugin.name>
+		<project.java.mainclass></project.java.mainclass>
 	</properties>
 
 
