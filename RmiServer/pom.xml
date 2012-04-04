@@ -14,18 +14,13 @@
 	</parent>
 
 	<build>
-
 		<plugins>
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
 			</plugin>
-
-
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 			</plugin>
-
-
 		</plugins>
 	</build>
 
