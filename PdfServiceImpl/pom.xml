@@ -17,7 +17,7 @@
 			<plugin>
 				<groupId>es.gob.catastro.maven.plugin</groupId>
 				<artifactId>maven-xsltc-plugin</artifactId>
-				<version>1.0-SNAPSHOT</version>
+				<version>1.0</version>
 				<executions>
 					<execution>
 						<phase>compile</phase>
