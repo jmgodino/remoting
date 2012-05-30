@@ -9,7 +9,7 @@ import es.gob.catastro.service.rmi.client.RmiOracleClient;
 
 public class PDFClient extends RmiOracleClient<PDFService> implements PDFService {
 
-	@Override
+	
 	public PDFBuffer generarPDF(String xml, String trans) {
 		PDFService service = getService("PdfService");
 		try {

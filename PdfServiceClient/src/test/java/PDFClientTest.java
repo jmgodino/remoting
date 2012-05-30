@@ -17,8 +17,8 @@ public class PDFClientTest {
 		for (int i=0; i<100; i++) {
 
 			pool.execute(new Runnable() {
-				
-				@Override
+			
+			
 				public void run() {
 					PDFClientSqlite client = new PDFClientSqlite();
 					client.setRetries(2);
