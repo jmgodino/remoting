@@ -44,6 +44,9 @@
 		<module>PdfServiceIntf</module>
 		<module>PdfServiceImpl</module>
 		<module>PdfServiceClient</module>
+		<module>PingServiceIntf</module>
+		<module>PingServiceImpl</module>
+		<module>PingServiceClient</module>		
 	</modules>
 
 </project>
