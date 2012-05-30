@@ -1,7 +1,6 @@
 package es.gob.catastro.service.rmi.ping.client;
 
 import java.rmi.RemoteException;
-
 import es.gob.catastro.service.ping.PingService;
 import es.gob.catastro.service.ping.PingServiceException;
 import es.gob.catastro.service.rmi.client.RmiOracleClient;
