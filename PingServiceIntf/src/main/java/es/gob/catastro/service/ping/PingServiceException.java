@@ -2,9 +2,7 @@ package es.gob.catastro.service.ping;
 
 public class PingServiceException extends RuntimeException {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	public PingServiceException() {
