@@ -26,6 +26,7 @@ public class PingClientTest {
 
 			
 			}	
+		
 		pool.shutdown();
 	}
 	
