@@ -3,7 +3,7 @@
   <groupId>es.gob.catastro.service</groupId>
   <artifactId>PdfServiceIntf</artifactId>
   <packaging>jar</packaging>
-  <version>1.2-SNAPSHOT</version>
+  <version>1.2</version>
 	
   	<parent>
 		<groupId>es.gob.catastro.project</groupId>

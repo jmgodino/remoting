@@ -7,7 +7,7 @@
   </parent>
   <groupId>es.gob.catastro.service</groupId>
   <artifactId>PingServiceImpl</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.2</version>
   <properties>
   	<java.version>1.6</java.version>
   	<distributable.plugin.name>plugin/ping</distributable.plugin.name>
@@ -26,7 +26,7 @@
 		<dependency>
 			<groupId>es.gob.catastro.service</groupId>
 			<artifactId>PingServiceIntf</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.2</version>
 		</dependency>
   </dependencies>
   <build>
