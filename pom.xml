@@ -34,10 +34,6 @@
 		</plugins>
 	</build>
 
-	<properties>
-		<scm.rmi.repo.url>scm|git|file:////explo/centralizacion/java/repo/rmi.git</scm.rmi.repo.url>
-	</properties>
-
 	<modules>
 		<module>ExtensibleCoreServer</module>
 		<module>RmiCoreClient</module>
