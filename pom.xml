@@ -3,7 +3,8 @@
 
 	<groupId>es.gob.catastro.service</groupId>
 	<artifactId>RemotingServer</artifactId>
-	<version>1.2</version>
+	<version>1.2-SNAPSHOT</version>
+
 	<packaging>pom</packaging>
 
 	<parent>
