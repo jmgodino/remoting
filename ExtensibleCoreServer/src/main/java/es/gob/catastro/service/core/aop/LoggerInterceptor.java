@@ -23,9 +23,9 @@ public class LoggerInterceptor {
 			long fin = System.currentTimeMillis();
 			log.info("OK: " + call+" duracion llamada (mseg): "+(fin-ini));
 			return obj;
-		} catch (Exception ex) {
+		} catch (Throwable ex) {
 			log.info("ERR: " + call, ex);
-			return ex;
+			throw ex;
 		}
 	}
 
