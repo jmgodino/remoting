@@ -8,8 +8,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 
@@ -19,7 +19,7 @@ import es.gob.catastro.service.pdf.PDFServiceException;
 public class TransletProcessor  {
 
 	private static final String TRANSLET_PACKAGE = "es.gob.catastro.service.rmi.pdf.server.translet";
-	private static final Log log = LogFactory.getLog(TransletProcessor.class);
+	private static final Logger log = LoggerFactory.getLogger(TransletProcessor.class);
 
 	Transformer transformer;
 	FopFactory fopFactory;
