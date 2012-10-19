@@ -1,7 +1,8 @@
 package es.gob.catastro.service.core.aop;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -9,7 +10,7 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect
 public class LoggerInterceptor {
 
-	private static final Log log = LogFactory.getLog(LoggerInterceptor.class);
+	private static final Logger log = LoggerFactory.getLogger(LoggerInterceptor.class);
 
 
 	@Around("this(java.rmi.Remote)")
