@@ -1,7 +1,7 @@
 package es.gob.catastro.service.rmi.pdf.server;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import es.gob.catastro.service.pdf.PDFService;
 import es.gob.catastro.service.pdf.PDFServiceException;
@@ -12,7 +12,7 @@ import es.gob.catastro.service.rmi.pdf.server.translet.TransletProcessor;
 
 public class PDFPlugin implements PDFService {
 
-	private static final Log log = LogFactory.getLog(PDFPlugin.class);
+	private static final Logger log = LoggerFactory.getLogger(PDFPlugin.class);
 
 	public PDFPlugin() {
 		super();
