@@ -2,15 +2,15 @@ package es.gob.catastro.service.rmi.ping.server;
 
 import java.rmi.RemoteException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import es.gob.catastro.service.ping.PingService;
 import es.gob.catastro.service.ping.PingServiceException;
 
 
 public class PingPlugin implements PingService {
-	private static final Log log = LogFactory.getLog(PingPlugin.class);
+	private static final Logger log = LoggerFactory.getLogger(PingPlugin.class);
 	
 	@Override
 	public String ping() throws RemoteException  {
