@@ -27,19 +27,19 @@ public class LogPluginConfiguration {
 
 	static {
 		LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
-		Logger rootLogger = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+		Logger rootLogger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 		rootLogger.setLevel(Level.WARN);
 
 		PatternLayoutEncoder encoder = new PatternLayoutEncoder();
 		encoder.setPattern(loggerContext.getProperty("DEFAULT_PATTERN"));
-		encoder.setContext(loggerContext);		
-	    encoder.setImmediateFlush(false);
-	    encoder.start();
+		encoder.setContext(loggerContext);
+		encoder.setImmediateFlush(false);
+		encoder.start();
 
 		ConsoleAppender<ILoggingEvent> appender = new ConsoleAppender<ILoggingEvent>();
-	    appender.setEncoder(encoder);
-	    appender.setContext(loggerContext);
-	    
+		appender.setEncoder(encoder);
+		appender.setContext(loggerContext);
+
 		rootLogger.addAppender(appender);
 	}
 
@@ -80,55 +80,86 @@ public class LogPluginConfiguration {
 
 	public void configure() {
 		if (logFile == null) {
-			throw new IllegalArgumentException(
-					"LogPluginConfiguration - No se ha indicado el nombre del fichero de log");
+			throw new IllegalArgumentException("LogPluginConfiguration - No se ha indicado el nombre del fichero de log");
 		}
 
 		if (pattern == null) {
-			throw new IllegalArgumentException(
-					"LogPluginConfiguration - No se ha indicado el patron del fichero de log");
+			throw new IllegalArgumentException("LogPluginConfiguration - No se ha indicado el patron del fichero de log");
 		}
 
 		try {
 			LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
-			Logger logger = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-			logger.setLevel(Level.toLevel(level));	
-			
+
 			PatternLayoutEncoder encoder = new PatternLayoutEncoder();
 			encoder.setContext(loggerContext);
 			encoder.setPattern(format);
 			encoder.setImmediateFlush(!buffered);
 			encoder.start();
+
 			FileAppender<ILoggingEvent> fa = null;
 
 			if (rolling) {
-				fa = new RollingFileAppender<ILoggingEvent>();
-				RollingFileAppender<ILoggingEvent> rfa = (RollingFileAppender<ILoggingEvent>)fa;
-				fa.setFile(logFile);
-				fa.setEncoder(encoder);
-				fa.setAppend(!truncate);
-				SizeBasedTriggeringPolicy<ILoggingEvent> triggerPolicy = new SizeBasedTriggeringPolicy<ILoggingEvent>();
-				triggerPolicy.setMaxFileSize(maxSize.toString());
-				FixedWindowRollingPolicy rollingPolicy = new FixedWindowRollingPolicy();
-				rollingPolicy.setMaxIndex(MAX_BACKUP);
-				rfa.setTriggeringPolicy(triggerPolicy );
-				rfa.setRollingPolicy(rollingPolicy);
+				fa = createRollingFileAppender(loggerContext, encoder);
 			} else {
-				fa = new FileAppender<ILoggingEvent>();
-				fa.setFile(logFile);
-				fa.setEncoder(encoder);
-				fa.setAppend(!truncate);
+				fa = createFlatFileAppender(loggerContext, encoder);
 			}
 
-			fa.setContext(loggerContext);
+			// Creamos el log y lo inicializamos
+			Logger logger = (Logger) LoggerFactory.getLogger(pattern);
+			logger.setLevel(Level.toLevel(level));
 			logger.addAppender(fa);
-			
+			logger.setAdditive(false);
+
+			logger.info("Logger inicializado");
 
 		} catch (Throwable e) {
-			System.out
-					.println("LogPluginConfiguration - Error configurando framework logging: "
-							+ e.toString());
+			System.out.println("LogPluginConfiguration - Error configurando framework logging: " + e.toString());
 		}
+	}
+
+	protected FileAppender<ILoggingEvent> createFlatFileAppender(LoggerContext loggerContext, PatternLayoutEncoder encoder) {
+		FileAppender<ILoggingEvent> fa = new FileAppender<ILoggingEvent>();
+		
+		fa.setContext(loggerContext);
+		fa.setEncoder(encoder);
+		fa.setAppend(!truncate);		
+		fa.setFile(logFile);
+		fa.setName(pattern);
+		fa.start();
+		
+		return fa;
+	}
+
+	protected FileAppender<ILoggingEvent> createRollingFileAppender(LoggerContext loggerContext, PatternLayoutEncoder encoder) {
+		RollingFileAppender<ILoggingEvent> rfa = new RollingFileAppender<ILoggingEvent>();
+
+		rfa.setContext(loggerContext);
+		rfa.setEncoder(encoder);
+		rfa.setAppend(!truncate);
+		rfa.setFile(logFile);
+		rfa.setName(pattern);		
+
+		SizeBasedTriggeringPolicy<ILoggingEvent> triggerPolicy = new SizeBasedTriggeringPolicy<ILoggingEvent>();
+		triggerPolicy.setContext(loggerContext);
+		triggerPolicy.setMaxFileSize(maxSize.toString());
+
+		FixedWindowRollingPolicy rollingPolicy = new FixedWindowRollingPolicy();
+		rollingPolicy.setContext(loggerContext);
+		rollingPolicy.setFileNamePattern(logFile + ".%i");
+		rollingPolicy.setMinIndex(1);
+		rollingPolicy.setMaxIndex(MAX_BACKUP);
+		rollingPolicy.setParent(rfa);
+		
+		rfa.setTriggeringPolicy(triggerPolicy);
+		rfa.setRollingPolicy(rollingPolicy);
+
+		triggerPolicy.start();
+		rollingPolicy.start();
+		rfa.start();
+		
+		LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME).info("Se ha creado un log rotatorio: "+logFile+" para el patron: "+pattern);
+		
+		return rfa;
 	}
 
 }
