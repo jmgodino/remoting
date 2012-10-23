@@ -3,7 +3,7 @@
 
   <groupId>es.gob.catastro.service.client.ping</groupId>
   <artifactId>PingServiceClient</artifactId>
-  <version>1.4-SNAPSHOT</version>
+  <version>1.5-SNAPSHOT</version>
 
   <parent>
     <artifactId>NexusProject</artifactId>
@@ -15,7 +15,7 @@
   	<dependency>
   		<groupId>es.gob.catastro.service.client</groupId>
   		<artifactId>RmiCoreClient</artifactId>
-  		<version>1.4-SNAPSHOT</version>
+  		<version>1.5-SNAPSHOT</version>
   	</dependency>
   	<dependency>
   		<groupId>org.xerial</groupId>
@@ -26,7 +26,7 @@
   	<dependency>
   		<groupId>es.gob.catastro.service</groupId>
   		<artifactId>PingServiceIntf</artifactId>
-  		<version>1.4-SNAPSHOT</version>
+  		<version>1.5-SNAPSHOT</version>
   	</dependency>
   </dependencies>
 

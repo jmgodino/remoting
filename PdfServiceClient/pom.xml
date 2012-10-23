@@ -3,7 +3,7 @@
 	
 	<groupId>es.gob.catastro.service.client.ext</groupId>
 	<artifactId>PdfServiceClient</artifactId>
-	<version>1.4-SNAPSHOT</version>
+	<version>1.5-SNAPSHOT</version>
 	
 	<packaging>jar</packaging>
 
@@ -30,12 +30,12 @@
 		<dependency>
 			<groupId>es.gob.catastro.service</groupId>
 			<artifactId>PdfServiceIntf</artifactId>
-			<version>1.4-SNAPSHOT</version>
+			<version>1.5-SNAPSHOT</version>
 		</dependency>	
 		<dependency>
 			<groupId>es.gob.catastro.service.client</groupId>
 			<artifactId>RmiCoreClient</artifactId>
-			<version>1.4-SNAPSHOT</version>
+			<version>1.5-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.xerial</groupId>

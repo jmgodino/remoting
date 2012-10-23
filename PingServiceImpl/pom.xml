@@ -3,7 +3,7 @@
 
   <groupId>es.gob.catastro.service</groupId>
   <artifactId>PingServiceImpl</artifactId>
-  <version>1.4-SNAPSHOT</version>
+  <version>1.5-SNAPSHOT</version>
   
   <parent>
     <artifactId>DistributableProject</artifactId>
@@ -26,7 +26,7 @@
 		<dependency>
 			<groupId>es.gob.catastro.service</groupId>
 			<artifactId>PingServiceIntf</artifactId>
-			<version>1.4-SNAPSHOT</version>
+			<version>1.5-SNAPSHOT</version>
 		</dependency>
   </dependencies>
   
