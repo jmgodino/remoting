@@ -18,7 +18,7 @@ public class LogPluginConfiguration {
 	private static final int MAX_BACKUP = 3;
 	private String logFile;
 	private String pattern;
-	private String format = "%d{ABSOLUTE} %5p %c{0}:%L - %m%n";
+	private String format = "%d{ABSOLUTE} %5p %C{0}:%L - %m%n";
 	private String level = Level.WARN.toString();
 	private Boolean rolling = true;
 	private Long maxSize = 10000000L;

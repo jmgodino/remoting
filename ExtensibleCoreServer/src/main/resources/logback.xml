@@ -5,7 +5,7 @@
 
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
 	  <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%d{ABSOLUTE} %5p %c{0}:%L - %m%n</pattern>
+            <pattern>%d{ABSOLUTE} %5p %C{0}:%L - %m%n</pattern>
        </encoder>
 
 	</appender>
