@@ -10,7 +10,7 @@
         <property name="service" ref="PdfPlugin"/>
         <property name="serviceInterface" value="es.gob.catastro.service.pdf.PDFService"/>
         <property name="registryPort" ref="rmiServicePort"/>
-		<property name="servicePort" value="55000" />
+		<property name="servicePort" value="80000" />
     </bean>
     
     <bean id="loggerPdfPlugin" class="es.gob.catastro.service.core.logging.LogPluginConfiguration" init-method="configure">
