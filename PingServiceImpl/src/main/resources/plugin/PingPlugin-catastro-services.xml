@@ -10,7 +10,7 @@
         <property name="service" ref="PingPlugin"/>
         <property name="serviceInterface" value="es.gob.catastro.service.ping.PingService"/>
         <property name="registryPort" ref="rmiServicePort"/>
-		<property name="servicePort" value="80001" />
+		<property name="servicePort" value="25001" />
     </bean>
 
     
