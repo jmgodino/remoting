@@ -57,20 +57,25 @@ class Test implements Runnable {
 	@Override
 	public void run() {
 		Connection con = null;
+		CallableStatement cs = null;
 		try {
 			con = ds.getConnection();
 			System.out.println("Invocando servicio RMI mediante BB.DD. "+contador.incrementAndGet());
-			CallableStatement cs = con.prepareCall("{ call "+procedure+"}");
+			cs = con.prepareCall("{ call "+procedure+"}");
 			cs.execute();
-			cs.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			if (cs != null) {
+				try {
+					cs.close();
+				} catch (Exception e) {
+				}
+			}			
 			if (con != null) {
 				try {
 					con.close();
 				} catch (Exception e) {
-					// TODO: handle exception
 				}
 			}
 		}
