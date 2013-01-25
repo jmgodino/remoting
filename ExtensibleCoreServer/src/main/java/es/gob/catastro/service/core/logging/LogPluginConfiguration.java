@@ -18,6 +18,7 @@ public class LogPluginConfiguration {
 	private static final int MAX_BACKUP = 3;
 	private String logFile;
 	private String pattern;
+	private String[] patterns;
 	private String format = "%d{ABSOLUTE} %5p %C{0}:%L - %m%n";
 	private String level = Level.WARN.toString();
 	private Boolean rolling = true;
@@ -66,6 +67,10 @@ public class LogPluginConfiguration {
 		this.pattern = pattern;
 	}
 
+	public void setPatterns(String[] patterns) {
+		this.patterns = patterns;
+	}
+
 	public void setRolling(Boolean rolling) {
 		this.rolling = rolling;
 	}
@@ -83,7 +88,7 @@ public class LogPluginConfiguration {
 			throw new IllegalArgumentException("LogPluginConfiguration - No se ha indicado el nombre del fichero de log");
 		}
 
-		if (pattern == null) {
+		if (pattern == null && patterns == null) {
 			throw new IllegalArgumentException("LogPluginConfiguration - No se ha indicado el patron del fichero de log");
 		}
 
@@ -105,12 +110,25 @@ public class LogPluginConfiguration {
 			}
 
 			// Creamos el log y lo inicializamos
-			Logger logger = (Logger) LoggerFactory.getLogger(pattern);
-			logger.setLevel(Level.toLevel(level));
-			logger.addAppender(fa);
-			logger.setAdditive(false);
+			if (pattern != null) {
+				Logger logger = (Logger) LoggerFactory.getLogger(pattern);
+				logger.setLevel(Level.toLevel(level));
+				logger.addAppender(fa);
+				logger.setAdditive(false);
+				logger.info("Logger inicializado: " + pattern);
+			}
 
-			logger.info("Logger inicializado");
+			if (patterns != null && patterns.length > 0) {
+				int i = 0;
+				while (i < patterns.length) {
+					Logger logger = (Logger) LoggerFactory.getLogger(patterns[i]);
+					logger.setLevel(Level.toLevel(level));
+					logger.addAppender(fa);
+					logger.setAdditive(false);
+					logger.info("Logger inicializado: " + patterns[i]);
+					i++;
+				}
+			}
 
 		} catch (Throwable e) {
 			System.out.println("LogPluginConfiguration - Error configurando framework logging: " + e.toString());
@@ -119,14 +137,14 @@ public class LogPluginConfiguration {
 
 	protected FileAppender<ILoggingEvent> createFlatFileAppender(LoggerContext loggerContext, PatternLayoutEncoder encoder) {
 		FileAppender<ILoggingEvent> fa = new FileAppender<ILoggingEvent>();
-		
+
 		fa.setContext(loggerContext);
 		fa.setEncoder(encoder);
-		fa.setAppend(!truncate);		
+		fa.setAppend(!truncate);
 		fa.setFile(logFile);
 		fa.setName(pattern);
 		fa.start();
-		
+
 		return fa;
 	}
 
@@ -137,7 +155,7 @@ public class LogPluginConfiguration {
 		rfa.setEncoder(encoder);
 		rfa.setAppend(!truncate);
 		rfa.setFile(logFile);
-		rfa.setName(pattern);		
+		rfa.setName(pattern);
 
 		SizeBasedTriggeringPolicy<ILoggingEvent> triggerPolicy = new SizeBasedTriggeringPolicy<ILoggingEvent>();
 		triggerPolicy.setContext(loggerContext);
@@ -149,16 +167,16 @@ public class LogPluginConfiguration {
 		rollingPolicy.setMinIndex(1);
 		rollingPolicy.setMaxIndex(MAX_BACKUP);
 		rollingPolicy.setParent(rfa);
-		
+
 		rfa.setTriggeringPolicy(triggerPolicy);
 		rfa.setRollingPolicy(rollingPolicy);
 
 		triggerPolicy.start();
 		rollingPolicy.start();
 		rfa.start();
-		
-		LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME).info("Se ha creado un log rotatorio: "+logFile+" para el patron: "+pattern);
-		
+
+		LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME).info("Se ha creado un log rotatorio: " + logFile + " para el patron: " + pattern);
+
 		return rfa;
 	}
 

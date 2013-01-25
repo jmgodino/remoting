@@ -16,7 +16,10 @@ public class TraceServerInfo implements Runnable {
 
 	public TraceServerInfo() {
 		super();
-		fmt = (DecimalFormat)DecimalFormat.getInstance(new Locale("es","ES"));
+		fmt = (DecimalFormat) DecimalFormat.getInstance(new Locale("es", "ES"));
+	}
+
+	public void start() {
 		ExecutorService exec = Executors.newSingleThreadExecutor();
 		exec.execute(this);
 	}
@@ -29,26 +32,27 @@ public class TraceServerInfo implements Runnable {
 		this.interval = interval;
 	}
 
-	public void traceThreads() {
+	private void traceThreads() {
 		log.info("Numero de threads activos: " + Thread.getAllStackTraces().size());
 	}
 
-	public void traceMemory() {
+	private void traceMemory() {
 		long freeMem = Runtime.getRuntime().freeMemory();
 		long totalMem = Runtime.getRuntime().totalMemory();
 		double porcentaje = 100 * ((double) freeMem / (double) totalMem);
 
-		log.info("Memoria libre: " + fmt.format(freeMem) + " bytes de " + fmt.format(totalMem) + " bytes reservados -> " + fmt.format(porcentaje) + "%");
+		log.info("Memoria libre: " + fmt.format(freeMem) + " bytes de " + fmt.format(totalMem) + " bytes reservados -> "
+				+ fmt.format(porcentaje) + "%");
 	}
 
 	@Override
 	public void run() {
-		log.info("Iniciando hilo de monitorizacion");
+		log.info("Iniciando hilo de monitorizacion: " + interval);
 		while (true) {
 			try {
+				Thread.sleep(interval);
 				traceThreads();
 				traceMemory();
-				Thread.sleep(interval);
 			} catch (Exception e) {
 				log.error("Error en el hilo de monitorizacion. Abortando");
 				return;

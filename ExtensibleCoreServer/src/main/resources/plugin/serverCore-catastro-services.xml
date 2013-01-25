@@ -1,50 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 					    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+					    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	">
 
-	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-	  <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_FALLBACK"/>
-	  <property name="searchSystemEnvironment" value="true"/>
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_FALLBACK" />
+		<property name="searchSystemEnvironment" value="true" />
 	</bean>
 
- 
-	<bean id="rmiServicePort"  class="java.lang.Integer">
-		<constructor-arg value="${server.core.rmi.port}"/>
+	<bean id="loggerPrincipal"
+		class="es.gob.catastro.service.core.logging.LogPluginConfiguration"
+		init-method="configure">
+		<property name="logFile" value="../logs/core-services.txt" />
+		<property name="patterns"
+			value="es.gob.catastro.service.core.jmx,es.gob.catastro.service.core.manager,org.springframework" />
+		<property name="level" value="INFO" />
+		<property name="format" value="%d{dd/MM/yyyy HH:mm:ss} - %m%n" />
+		<property name="buffered" value="false" />
 	</bean>
- 	
+
+	<bean id="loggerAccessControl"
+		class="es.gob.catastro.service.core.logging.LogPluginConfiguration"
+		init-method="configure">
+		<property name="logFile" value="../logs/core-access.txt" />
+		<property name="pattern" value="es.gob.catastro.service.core.aop" />
+		<property name="level" value="INFO" />
+		<property name="format" value="%d{dd/MM/yyyy HH:mm:ss} - %m%n" />
+		<property name="buffered" value="false" />
+	</bean>
+
+	<bean id="loggerStatus"
+		class="es.gob.catastro.service.core.logging.LogPluginConfiguration"
+		init-method="configure">
+		<property name="logFile" value="../logs/core-status.txt" />
+		<property name="pattern" value="es.gob.catastro.service.core.inspector" />
+		<property name="level" value="INFO" />
+		<property name="format" value="%d{dd/MM/yyyy HH:mm:ss} - %m%n" />
+		<property name="buffered" value="false" />
+	</bean>
+
+
+	<bean id="rmiServicePort" class="java.lang.Integer">
+		<constructor-arg value="${server.core.rmi.port}" />
+	</bean>
+
 	<!-- Solo necesario si se va a usar el rmiregistry externo del JDK -->
-	<!-- 	
-	<bean id="rmiServiceHost" class="java.lang.String">
-		<constructor-arg value="localhost" />
+	<!-- <bean id="rmiServiceHost" class="java.lang.String"> <constructor-arg 
+		value="localhost" /> </bean> -->
+
+
+	<bean id="traceServerInfo" class="es.gob.catastro.service.core.inspector.TraceServerInfo"
+		init-method="start">
+		<property name="interval" value="120000" />
 	</bean>
- 	-->
- 
- 	<aop:aspectj-autoproxy/>
- 	
- 	<bean id="traceServerInfo" class="es.gob.catastro.service.core.inspector.TraceServerInfo">
- 		<property name="interval" value="120000" />
- 	</bean>
- 	
-    <bean id="loggerAccessControl" class="es.gob.catastro.service.core.logging.LogPluginConfiguration" init-method="configure">
-    	<property name="logFile" value="../logs/core-access.txt"/>
-    	<property name="pattern" value="es.gob.catastro.service.core.aop"/>
-    	<property name="level" value="INFO"/>
-    	<property name="format" value="%d{dd/MM/yyyy HH:mm:ss} - %m%n" />
-    	<property name="buffered" value="false" />
-    </bean>
-    
-    <bean id="loggerStatus" class="es.gob.catastro.service.core.logging.LogPluginConfiguration" init-method="configure">
-    	<property name="logFile" value="../logs/core-status.txt"/>
-    	<property name="pattern" value="es.gob.catastro.service.core.inspector"/>
-    	<property name="level" value="INFO"/>
-    	<property name="format" value="%d{dd/MM/yyyy HH:mm:ss} - %m%n" />
-    	<property name="buffered" value="false" />
-    </bean>    
-    
-    <bean id="logAspect" class="es.gob.catastro.service.core.aop.LoggerInterceptor" />
-    
-</beans>    
+
+	<bean id="serviceReloadBean" class="es.gob.catastro.service.core.jmx.ServiceReloadBean" />
+
+	<bean id="exporter" class="org.springframework.jmx.export.MBeanExporter"
+		lazy-init="false">
+		<property name="beans">
+			<map>
+				<entry key="bean:name=serviceReloadBean" value-ref="serviceReloadBean" />
+			</map>
+		</property>
+	</bean>
+
+</beans>

@@ -14,14 +14,14 @@ public class PDFClientTest {
 		final Random rnd = new Random();
 		ExecutorService pool = Executors.newFixedThreadPool(5);
 		
-		for (int i=0; i<100; i++) {
+		for (int i=0; i<1; i++) {
 
 			pool.execute(new Runnable() {
 			
 			
 				public void run() {
 					PDFClientSqlite client = new PDFClientSqlite();
-					client.setRetries(2);
+					client.setRetries(1);
 					try {
 						FileHelper.writeFile(filePdf+rnd.nextInt(10000)+".pdf", client.generarPDF(FileHelper.readFile(fileXml), transformer).getContent());
 					} catch (Exception e) {

@@ -6,7 +6,7 @@
 	<bean id="PingPlugin" class="es.gob.catastro.service.rmi.ping.server.PingPlugin" />        
 
     <bean id="PingService" class="org.springframework.remoting.rmi.RmiServiceExporter">
-        <property name="serviceName" value="Ping"/>
+        <property name="serviceName" value="PingService"/>
         <property name="service" ref="PingPlugin"/>
         <property name="serviceInterface" value="es.gob.catastro.service.ping.PingService"/>
         <property name="registryPort" ref="rmiServicePort"/>

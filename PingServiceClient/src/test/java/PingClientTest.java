@@ -15,7 +15,7 @@ public class PingClientTest {
 				
 				public void run() {
 					PingClientSqllite client = new PingClientSqllite();
-					client.setRetries(2);
+					client.setRetries(1);
 					try {
 						System.out.println(client.ping());
 					} catch (Exception e) {

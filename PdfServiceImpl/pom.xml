@@ -21,7 +21,7 @@
 				<version>1.0</version>
 				<executions>
 					<execution>
-						<phase>compile</phase>
+						<phase>prepare-package</phase>
 						<goals>
 							<goal>xsltc</goal>
 						</goals>

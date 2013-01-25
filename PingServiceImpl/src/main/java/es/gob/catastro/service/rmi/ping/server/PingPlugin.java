@@ -15,7 +15,7 @@ public class PingPlugin implements PingService {
 	@Override
 	public String ping() throws RemoteException  {
 		try{
-			return "Ack from " +  java.net.InetAddress.getLocalHost().getHostName();		
+			return "Fuck you! from " +  java.net.InetAddress.getLocalHost().getHostName();		
 	   } catch (Exception e) {
 		log.error("Error en el Ping", e);
   		throw new PingServiceException("Error en el plugin de Ping", e);

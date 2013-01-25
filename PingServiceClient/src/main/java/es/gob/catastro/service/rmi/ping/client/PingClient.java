@@ -8,7 +8,7 @@ import es.gob.catastro.service.rmi.client.RmiOracleClient;
 public class PingClient extends RmiOracleClient<PingService> implements PingService  {
 	
 	public String ping() {
-		PingService service = getService ("Ping");
+		PingService service = getService ("PingService");
 		try {
 			return service.ping();
 		} catch (RemoteException e) {

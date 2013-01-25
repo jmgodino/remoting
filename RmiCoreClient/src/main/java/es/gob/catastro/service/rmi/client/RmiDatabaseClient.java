@@ -17,12 +17,12 @@ public abstract class RmiDatabaseClient<T> extends RmiClient<T> {
 		List<RmiLocation> urls = getUrls();
 		for (int i = 1; i <= getRetries(); i++) {
 			try {
-				return getRandomHostService(urls, name);				
+				return getRandomHostService(new ArrayList<RmiLocation>(urls), name);				
 			} catch (Exception e) {
 				debug("Error invocando al servicio", e);
 			}
 		}		
-		throw new RmiClientException("No se ha podido acceder al servicio remoto");	
+		throw new RmiClientException("No se ha podido encontrar el servicio remoto");	
 		
 	}
 

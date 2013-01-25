@@ -48,7 +48,7 @@ public class RmiClient<T> {
 		Random rnd = new Random();
 		Integer intentos = urls.size();
 		
-		for (int pos=0; pos<intentos; pos++) {
+		for (int pos=1; pos<=intentos; pos++) {
 			RmiLocation url = urls.get(rnd.nextInt(urls.size()));
 			try {
 				T service = getService(url.getHost(), url.getPort(), name);
