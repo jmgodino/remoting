@@ -39,7 +39,7 @@ public class ServiceReloadBean implements ServiceReload {
 		}
 		ClassPathXmlApplicationContext cpAC = context.get(service);
 		cpAC.close();
-		log.error("Servicio parado: " + service);
+		log.error("Servicio parado: {}", service);
 		context.remove(service);
 	}
 
@@ -61,17 +61,17 @@ public class ServiceReloadBean implements ServiceReload {
 		    throw new RemotingServerException("El servicio ya esta cargado en aplicacion, debe pararlo primero");
 		}
 		
-		log.info("Cargando el servicio: " + service);
+		log.info("Cargando el servicio: {}", service);
 		ClassLoader pluginLoader = PluginClassloader.getPluginClassLoader(service);
 		ClassPathXmlApplicationContext cpAC = new ClassPathXmlApplicationContext();
 		cpAC.setClassLoader(pluginLoader);
 		String config = getServiceDescriptor(service);
-		log.info("Estableciendo configuracion: " + config);
+		log.info("Estableciendo configuracion: {}", config);
 		cpAC.setConfigLocation(config+","+getServiceDescriptor(LOGGING));
 		cpAC.setParent(context.get(CORE));
 		cpAC.refresh();
 		context.put(service, cpAC);
-		log.error("Servicio cargado: " + service);
+		log.error("Servicio cargado: {}", service);
 	}
 
 	private String getServiceDescriptor(String service) {

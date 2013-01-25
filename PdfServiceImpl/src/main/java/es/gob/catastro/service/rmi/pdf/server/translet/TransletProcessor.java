@@ -45,7 +45,7 @@ public class TransletProcessor  {
 			transformer.transform(new StreamSource(new StringReader(xml)),
 					new SAXResult(fop.getDefaultHandler()));
 			long fin = System.currentTimeMillis();
-			log.debug("Tiempo del transformador: " + (fin - ini) + "ms");
+			log.debug("Tiempo del transformador: {} ms", fin-ini);
 			return out.toByteArray();
 		} catch (Exception e) {
 			log.error("Error en la transforamcion", e);
@@ -57,7 +57,7 @@ public class TransletProcessor  {
 
 	private void init(String trans) {
 		try {
-			log.debug("Inicializando translet: "+trans);
+			log.debug("Inicializando translet: {}" , trans);
 			TransformerFactory tf = TransformerFactory.newInstance();
 			tf.setAttribute("use-classpath", Boolean.TRUE);
 			tf.setAttribute("package-name", TRANSLET_PACKAGE);

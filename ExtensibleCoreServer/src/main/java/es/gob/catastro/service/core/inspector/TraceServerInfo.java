@@ -33,7 +33,7 @@ public class TraceServerInfo implements Runnable {
 	}
 
 	private void traceThreads() {
-		log.info("Numero de threads activos: " + Thread.getAllStackTraces().size());
+		log.info("Numero de threads activos: {}" , Thread.getAllStackTraces().size());
 	}
 
 	private void traceMemory() {
@@ -41,13 +41,12 @@ public class TraceServerInfo implements Runnable {
 		long totalMem = Runtime.getRuntime().totalMemory();
 		double porcentaje = 100 * ((double) freeMem / (double) totalMem);
 
-		log.info("Memoria libre: " + fmt.format(freeMem) + " bytes de " + fmt.format(totalMem) + " bytes reservados -> "
-				+ fmt.format(porcentaje) + "%");
+		log.info("Memoria libre: {} bytes de {} bytes reservados -> {} %", new Object[] {fmt.format(freeMem), fmt.format(totalMem), fmt.format(porcentaje)});
 	}
 
 	@Override
 	public void run() {
-		log.info("Iniciando hilo de monitorizacion: " + interval);
+		log.info("Iniciando hilo de monitorizacion: {} ", interval);
 		while (true) {
 			try {
 				Thread.sleep(interval);

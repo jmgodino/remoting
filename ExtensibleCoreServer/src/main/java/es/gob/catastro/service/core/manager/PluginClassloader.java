@@ -29,7 +29,7 @@ public class PluginClassloader  {
 		}
 
 		String serviceHome = getServiceHome(service);
-		log.info("Cargando classpath para el servicio: " + service + " en la ruta " + serviceHome);
+		log.info("Cargando classpath para el servicio: {} en la ruta {}", service, serviceHome);
 
 		if (serviceHome == null) {
 			throw new RemotingServerException("No se ha encontrado el directorio del plugin");
@@ -57,7 +57,7 @@ public class PluginClassloader  {
 
 		if (matcher.find()) {
 			String pluginHome = matcher.group(1);
-			log.info("El directorio del servicio: " + service + " es: " + pluginHome);
+			log.info("El directorio del servicio: {} es: {}" , service, pluginHome);
 
 			// Filtro que busca todos los directorios cuyo nombre en mayusculas
 			// coincida con el del plugin sin la extension Plugin al final
@@ -79,7 +79,7 @@ public class PluginClassloader  {
 		}
 		String serviceHome = directorios[0];
 		String absoluteServiceHome = pluginDir + File.separator + serviceHome;
-		log.info("El directorio del plugin: " + service + " esta en la ruta: " + absoluteServiceHome);
+		log.info("El directorio del plugin: {} esta en la ruta: {}" , service, absoluteServiceHome);
 		return absoluteServiceHome;
 
 	}
@@ -96,11 +96,11 @@ public class PluginClassloader  {
 			urls = new URL[librerias.length];
 			for (File lib : librerias) {
 				urls[i] = lib.toURI().toURL();
-				log.error("Cargando libreria: " + urls[i]);
+				log.error("Cargando libreria: {}", urls[i]);
 				i++;
 			}
 		} catch (Exception e) {
-			log.error("Error cargando classloader del servicio: " + service, e);
+			log.error("Error cargando classloader del servicio: {}",  service, e);
 		}
 		return urls;
 	}
