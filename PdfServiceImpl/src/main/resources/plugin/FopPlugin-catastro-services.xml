@@ -3,15 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="PdfPlugin" class="es.gob.catastro.service.rmi.pdf.server.PDFPlugin" />        
+	<bean id="serviceImplementation" class="es.gob.catastro.service.rmi.pdf.server.PDFPlugin" />        
 
-    <bean id="PdfService" class="org.springframework.remoting.rmi.RmiServiceExporter">
-        <property name="serviceName" value="PdfService"/>
-        <property name="service" ref="PdfPlugin"/>
-        <property name="serviceInterface" value="es.gob.catastro.service.pdf.PDFService"/>
-        <property name="registryPort" ref="rmiServicePort"/>
-		<property name="servicePort" value="25002" />
-    </bean>
+	<bean id="serviceInterface" class="java.lang.String">
+	    <constructor-arg value="es.gob.catastro.service.pdf.PDFService" />
+	</bean>
+	        
+	<bean id="servicePort" class="java.lang.Integer">
+        <constructor-arg value="25002" />
+	</bean>	
     
     <bean id="loggerPdfPlugin" class="es.gob.catastro.service.core.logging.LogPluginConfiguration" init-method="configure">
     	<property name="logFile" value="../logs/pdfplugin-output.txt"/>

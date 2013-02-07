@@ -15,6 +15,7 @@ public class ServiceReloadBean implements ServiceReload {
 	private static final String LOGGING = "logging";
     private static Logger log = LoggerFactory.getLogger(ServiceReloadBean.class);
 	private static final String CORE = "serverCore";
+    private static final String RMI = "rmi";
 	private static Map<String, ClassPathXmlApplicationContext> context = new HashMap<String, ClassPathXmlApplicationContext>();
 
 	@Override
@@ -67,7 +68,7 @@ public class ServiceReloadBean implements ServiceReload {
 		cpAC.setClassLoader(pluginLoader);
 		String config = getServiceDescriptor(service);
 		log.info("Estableciendo configuracion: {}", config);
-		cpAC.setConfigLocation(config+","+getServiceDescriptor(LOGGING));
+		cpAC.setConfigLocation(config+","+getServiceDescriptor(LOGGING)+","+getServiceDescriptor(RMI));
 		cpAC.setParent(context.get(CORE));
 		cpAC.refresh();
 		context.put(service, cpAC);

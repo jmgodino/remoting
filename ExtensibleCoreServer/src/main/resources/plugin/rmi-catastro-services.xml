@@ -8,16 +8,13 @@
 	">
 
 
-	<aop:aspectj-autoproxy />
-
-	<aop:config>
-		<aop:pointcut id="loggingPointcut" expression="this(java.rmi.Remote)" />
-		<aop:aspect id="loggingAspect" ref="logAspect">
-			<aop:around pointcut-ref="loggingPointcut" method="executeCall" />
-		</aop:aspect>
-	</aop:config>
-
-	<bean id="logAspect" class="es.gob.catastro.service.core.aop.LoggerInterceptor" />
+	<bean id="remotingService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+		<property name="serviceName" ref="serviceInterface" />
+		<property name="service" ref="serviceImplementation" />
+		<property name="serviceInterface" ref="serviceInterface" />
+		<property name="registryPort" ref="rmiServicePort" />
+		<property name="servicePort" ref="servicePort" />
+	</bean>
 
 
 </beans>
