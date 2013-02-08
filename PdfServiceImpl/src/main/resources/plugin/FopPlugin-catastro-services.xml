@@ -6,7 +6,7 @@
 	<bean id="serviceImplementation" class="es.gob.catastro.service.rmi.pdf.server.PDFPlugin" />        
 
 	<bean id="serviceName" class="java.lang.String">
-	    <constructor-arg value="PDFService" />
+	    <constructor-arg value="PdfService" />
 	</bean>
 	
 	<bean id="serviceInterface" class="java.lang.String">
