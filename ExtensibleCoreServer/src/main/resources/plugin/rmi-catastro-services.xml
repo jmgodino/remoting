@@ -9,7 +9,7 @@
 
 
 	<bean id="remotingService" class="org.springframework.remoting.rmi.RmiServiceExporter">
-		<property name="serviceName" ref="serviceInterface" />
+		<property name="serviceName" ref="serviceName" />
 		<property name="service" ref="serviceImplementation" />
 		<property name="serviceInterface" ref="serviceInterface" />
 		<property name="registryPort" ref="rmiServicePort" />
