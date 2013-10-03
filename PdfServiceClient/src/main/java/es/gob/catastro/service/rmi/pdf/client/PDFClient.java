@@ -22,8 +22,7 @@ public class PDFClient extends RmiOracleClient<PDFService>
 		}
 	}
 
-	public static void generarPdf(BLOB xml, String nombreTransformador, BLOB pdf)
-			throws RemoteException {
+	public static BLOB generarPdf(BLOB xml, String nombreTransformador, BLOB pdf) {
 		try {
 			PDFBuffer input = new PDFBuffer(xml.getBinaryStream(),
 					(int) xml.length());
@@ -35,8 +34,9 @@ public class PDFClient extends RmiOracleClient<PDFService>
 			os.write(res.getContent(), 0, res.getLongitud());
 			os.flush();
 			os.close();
+			return pdf;
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new PDFServiceException("Error en invocacion al servicio Java",e);
 		}
 
 	}
