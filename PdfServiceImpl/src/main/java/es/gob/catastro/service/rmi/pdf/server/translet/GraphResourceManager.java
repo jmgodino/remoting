@@ -59,29 +59,18 @@ public class GraphResourceManager {
 	private byte[] readFile(String name) throws IOException {
 		InputStream is = new BufferedInputStream(getClass()
 				.getResourceAsStream(name));
-		CatastroByteArrayOutputStream bos = new CatastroByteArrayOutputStream(
+		ByteArrayOutputStream bos = new ByteArrayOutputStream(
 				BUFFER_SIZE);
 		log.info("Caching: {}", name);
-		byte[] buf = new byte[1024];
+		byte[] buf = new byte[100000];
 		int numRead = 0;
 		while ((numRead = is.read(buf)) != -1) {
 			bos.write(buf, 0, numRead);
 		}
 		is.close();
 		bos.close();
-		return bos.getBytes();
+		return bos.toByteArray();
 	}
 
 }
 
-class CatastroByteArrayOutputStream extends ByteArrayOutputStream {
-
-	public CatastroByteArrayOutputStream(int bufferSize) {
-		super(bufferSize);
-	}
-
-	public byte[] getBytes() {
-		return buf;
-	}
-
-}

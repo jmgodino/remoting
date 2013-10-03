@@ -3,7 +3,6 @@ package es.gob.catastro.service.rmi.pdf.server.translet;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -22,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import es.gob.catastro.service.pdf.PDFServiceException;
+import es.gob.catastro.service.pdf.util.PDFBuffer;
 
 public class TransletProcessor {
 
@@ -41,7 +41,7 @@ public class TransletProcessor {
 		this.transformerName = transformer;
 	}
 
-	public byte[] transform(String xml) {
+	public byte[] transform(PDFBuffer xml) {
 
 		try {
 
@@ -52,7 +52,7 @@ public class TransletProcessor {
 			ByteArrayOutputStream out = new ByteArrayOutputStream(INIT_SIZE);
 			Fop fop = fopFactory.newFop(PDF_MIMETYPE,
 					fopFactory.newFOUserAgent(), out);
-			transformer.transform(new StreamSource(new StringReader(xml)),
+			transformer.transform(new StreamSource(xml.getInputStream()),
 					new SAXResult(fop.getDefaultHandler()));
 			return out.toByteArray();
 		} catch (Exception e) {
@@ -98,7 +98,8 @@ public class TransletProcessor {
 			throws TransformerFactoryConfigurationError, TransformerException {
 		log.debug("Inicializando translet basado en xsl: {}", transformerName);
 		TransformerFactory tf = TransformerFactory.newInstance();
-		return tf.newTransformer(new StreamSource("/stylesheets/" + transformerName + ".xsl"));
+		return tf.newTransformer(new CatastroUriResolver().resolve("/stylesheets/" + transformerName + ".xsl",""));
+		//return tf.newTransformer(new StreamSource(getClass().getResourceAsStream("/stylesheets/" + transformerName + ".xsl")));
 	}
 
 	private void loadUriResolver(FopFactory fopFactory) {

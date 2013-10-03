@@ -30,7 +30,7 @@ public class PDFClientTest {
 					PDFClientSqlite client = new PDFClientSqlite();
 					client.setRetries(1);
 					try {
-						FileHelper.writeFile(filePdf+rnd.nextInt(10000)+".pdf", client.generarPDF(FileHelper.readFile(fileXml), transformer).getContent());
+						FileHelper.writeFile(client.generarPDF(FileHelper.readFile(fileXml), transformer), filePdf+rnd.nextInt(10000)+".pdf");
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

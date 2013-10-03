@@ -9,6 +9,6 @@ import es.gob.catastro.service.pdf.util.PDFBuffer;
 
 public interface PDFService extends Remote {	
 	
-	public PDFBuffer generarPDF(String xml, String transformer) throws RemoteException;
+	public PDFBuffer generarPDF(PDFBuffer xml, String transformer) throws RemoteException;
 
 }
