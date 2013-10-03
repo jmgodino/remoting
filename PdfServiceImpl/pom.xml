@@ -31,7 +31,7 @@
 					<packageName>es.gob.catastro.service.rmi.pdf.server.translet</packageName>
 					<outputDirectory>${project.build.outputDirectory}</outputDirectory>
 					<stylesheets>
-						<param>${basedir}/src/main/resources/stylesheets/Anexo.xsl</param>
+						<param>${basedir}/src/main/resources/stylesheets/ex1.xsl</param>
 					</stylesheets>
 				</configuration>
 			</plugin>
@@ -50,7 +50,7 @@
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
+				<filtering>false</filtering>
 			</resource>
 		</resources>
 
@@ -73,6 +73,16 @@
 				<artifactId>xml-apis</artifactId>
 				<version>1.3.04</version>
 			</dependency>
+			<dependency>
+				<groupId>org.apache.avalon.framework</groupId>
+				<artifactId>avalon-framework-api</artifactId>
+				<version>4.3.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.avalon.framework</groupId>
+				<artifactId>avalon-framework-impl</artifactId>
+				<version>4.3.1</version>
+			</dependency>			
 		</dependencies>
 	</dependencyManagement>
 
@@ -102,7 +112,7 @@
 		<dependency>
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>fop</artifactId>
-			<version>1.0</version>
+			<version>1.1</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>commons-logging</artifactId>
@@ -114,6 +124,13 @@
 			<groupId>es.gob.catastro.service</groupId>
 			<artifactId>PdfServiceIntf</artifactId>
 			<version>2.0-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<artifactId>commons-logging</artifactId>
+			<groupId>commons-logging</groupId>
+			<version>1.1.1</version>
+			<scope>test</scope>
 		</dependency>
 			
 	</dependencies>

@@ -12,9 +12,16 @@ public class PDFClientTest {
 		final String transformer = args[1];
 		final String filePdf = args[2];
 		final Random rnd = new Random();
-		ExecutorService pool = Executors.newFixedThreadPool(5);
 		
-		for (int i=0; i<1; i++) {
+		if (args.length < 4) {
+			System.out.println("Modo de uso: cmd <xml> <xsl> <pdf> <max_pool_size>");
+			System.exit(1);
+		}
+		
+		System.out.println("Creando pool con "+args[3]+" elementos");
+		ExecutorService pool = Executors.newFixedThreadPool(new Integer(args[3]));
+		
+		for (int i=0; i<1000; i++) {
 
 			pool.execute(new Runnable() {
 			
