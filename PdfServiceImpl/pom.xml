@@ -32,6 +32,7 @@
 					<outputDirectory>${project.build.outputDirectory}</outputDirectory>
 					<stylesheets>
 						<param>${basedir}/src/main/resources/stylesheets/ex1.xsl</param>
+						<param>${basedir}/src/main/resources/stylesheets/ttrec.xsl</param>
 					</stylesheets>
 				</configuration>
 			</plugin>
