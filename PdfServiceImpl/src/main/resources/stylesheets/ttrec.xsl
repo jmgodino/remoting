@@ -53,7 +53,7 @@
           <fo:table-body font-family="Helvetica">
             <fo:table-row background-color="#DCDCDC" 
                           height="3.37cm">
-              <fo:table-cell background-image="./images/escudotif.tif">
+              <fo:table-cell background-image="/images/escudotif.tif">
                 <fo:block padding-top="2.5cm"
                           text-align="center"
                           font-size="8pt"
@@ -239,7 +239,7 @@
                 </fo:block>
               </fo:table-cell>
               
-              <fo:table-cell background-image="./images/importe.png"
+              <fo:table-cell background-image="/images/importe.png"
                              border-right-color="black"
                              border-right-width="0.475pt" 
                              border-right-style="solid">
@@ -307,7 +307,7 @@
             <fo:table-row background-color="#FFFFFF" 
                           height="0.1cm">
               
-              <fo:table-cell background-image="./images/ccc.png"
+              <fo:table-cell background-image="/images/ccc.png"
                              number-rows-spanned="2"
                              border-bottom-color="black"
                              border-bottom-width="0.475pt"
@@ -538,7 +538,7 @@
           <fo:table-body>
             <fo:table-row background-color="#DCDCDC" 
                           height="3.37cm">
-              <fo:table-cell background-image="./images/escudotif.tif">
+              <fo:table-cell background-image="/images/escudotif.tif">
                 <fo:block padding-top="2.5cm"
                           text-align="center"
                           font-size="8pt"
@@ -724,7 +724,7 @@
                 </fo:block>
               </fo:table-cell>
               
-              <fo:table-cell background-image="./images/importe.png"
+              <fo:table-cell background-image="/images/importe.png"
                              border-right-color="black"
                              border-right-width="0.475pt" 
                              border-right-style="solid">
@@ -791,7 +791,7 @@
             <fo:table-row background-color="#FFFFFF" 
                           height="0.1cm">
               
-              <fo:table-cell background-image="./images/ccc.png"
+              <fo:table-cell background-image="/images/ccc.png"
                              number-rows-spanned="2"
                              border-bottom-color="black"
                              border-bottom-width="0.475pt"
