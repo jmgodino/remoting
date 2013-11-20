@@ -293,7 +293,7 @@
                   Documento firmado electrónicamente con código seguro de verificación (CSV) por la Dirección General del Catastro
                 </fo:block>
                 <fo:block text-align="center"
-                          font-size="6pt"
+                          font-size="8pt"
                           margin-left="0cm"
                           padding-left="0.5cm"
                           padding-top="0.38cm"
@@ -414,6 +414,7 @@
                   border-collapse="separate" 
                   table-layout="fixed" 
                   width="100%">
+                  
           <fo:table-column column-width="100%"/>
         
           <fo:table-body>        
@@ -513,7 +514,7 @@
                   General de Recaudación, aprobado por Real Decreto 939/2005, de 29 de julio.
                 </fo:block>
                 <fo:block><fo:character character="&#x2004;"/></fo:block>
-              </fo:table-cell>         
+              </fo:table-cell>
             </fo:table-row>
           </fo:table-body>
         </fo:table>
@@ -777,7 +778,7 @@
                   Documento firmado electrónicamente con código seguro de verificación (CSV) por la Dirección General del Catastro
                 </fo:block>
                 <fo:block text-align="center"
-                          font-size="7pt"
+                          font-size="8pt"
                           margin-left="0cm"
                           padding-left="0.5cm"
                           padding-top="0.38cm"
@@ -1381,22 +1382,23 @@
                       font-size="11.7pt"
                       margin-left="0cm"
                       padding-left="0.3cm">
-            - Nº inmuebles regularizados ..............<xsl:value-of select="./num_inm"/>
+            - Nº inmuebles regularizados ..<xsl:value-of select="./num_inm"/>
             </fo:block>
             
             <fo:block text-align="left"
                       font-size="11.7pt"
                       margin-left="0cm"
                       padding-left="0.3cm">
-            - Tasa por inmueble regularizado .....<xsl:value-of select="./tasa_inm"/>€
+            - Tasa por inmueble regularizado ....................... <xsl:value-of select="./tasa_inm"/>€
             </fo:block>
+            
             
             <fo:block text-align="left"
                       font-size="11.7pt"
                       margin-left="0cm"
                       padding-left="0.3cm">
-            - Total a ingresar .......... <xsl:value-of select="num_inm"/>x<xsl:value-of select="tasa_inm"/>€ ......
-            <xsl:value-of select="num_inm * tasa_inm"/>€
+            - Total a ingresar <xsl:value-of select="num_inm"/>x<xsl:value-of select="tasa_inm"/>€  
+            <xsl:value-of select="total_importe"/>€
             </fo:block>
             
             <fo:block>
@@ -1415,15 +1417,15 @@
             </fo:block>
           </fo:table-cell>
           <fo:table-cell number-rows-spanned="2">
-            <fo:block-container reference-orientation="90" 
-                                font-weight="bold"
-                                width="7.5cm"
+            <fo:block-container reference-orientation="90"
+                                width="12cm"
                                 height="0.5cm"
                                 margin-left="0cm"
                                 padding-left="0.08cm">
               <fo:block text-align="left"
-                        font-size="6pt">
-                <xsl:text>CSV: </xsl:text><xsl:value-of select="./../csv"/>
+                        font-style="italic"
+                        font-size="8pt">
+                <xsl:text>CSV: </xsl:text><fo:inline font-weight="bold"><xsl:value-of select="./../csv"/></fo:inline> (verificable en https://www.sedecatastro.gob.es)
               </fo:block>
             </fo:block-container>            
           </fo:table-cell>
@@ -1432,7 +1434,6 @@
                       border-separation="0.5cm"
                       background-color="#FFFFFF"
                       height="6cm">
-          
           <fo:table-cell background-color="#FFFFFF"
                          border-left-color="black"
                          border-right-color="black"
@@ -1454,9 +1455,7 @@
                       <xsl:value-of select="./cargo"/>
                       <xsl:value-of select="./dc1"/>
                       <xsl:value-of select="./dc2"/>
-                      <fo:block>
-                            <fo:character character="&#x2004;"/>
-                      </fo:block>
+                      <fo:block></fo:block>
                     </xsl:when>
                     <xsl:otherwise>
                       <xsl:value-of select="./pcatastral1"/>
