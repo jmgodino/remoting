@@ -16,26 +16,6 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>es.gob.catastro.maven.plugin</groupId>
-				<artifactId>maven-xsltc-plugin</artifactId>
-				<version>1.0</version>
-				<executions>
-					<execution>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>xsltc</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<packageName>es.gob.catastro.service.rmi.pdf.server.translet</packageName>
-					<outputDirectory>${project.build.outputDirectory}</outputDirectory>
-					<stylesheets>
-						<param>${basedir}/src/main/resources/stylesheets/ex1.xsl</param>
-					</stylesheets>
-				</configuration>
-			</plugin>
-			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
 			</plugin>
 

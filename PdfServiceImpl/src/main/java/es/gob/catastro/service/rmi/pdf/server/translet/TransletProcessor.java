@@ -6,7 +6,6 @@ import java.io.InputStream;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
@@ -28,7 +27,6 @@ public class TransletProcessor {
 	private static final String PDF_MIMETYPE = "application/pdf";
 	private static final String FONTS_DIRECTORY = "FONTS_DIRECTORY";
 	private static final String FOP_CONFIG_FILE = "META-INF/fop.xconf";
-	private static final String TRANSLET_PACKAGE = "es.gob.catastro.service.rmi.pdf.server.translet";
 	private static final Logger log = LoggerFactory
 			.getLogger(TransletProcessor.class);
 
@@ -77,29 +75,12 @@ public class TransletProcessor {
 
 	}
 
-	protected Transformer getTransformer() throws TransformerException {
-		try {
-			return getNativeTransformer();
-		} catch (TransformerException e) {
-			return getSourceTransformer();
-		}
-	}
 
-	protected Transformer getNativeTransformer()
-			throws TransformerException {
-		log.debug("Inicializando translet nativo: {}", transformerName);
-		TransformerFactory tf = TransformerFactory.newInstance();
-		tf.setAttribute("use-classpath", Boolean.TRUE);
-		tf.setAttribute("package-name", TRANSLET_PACKAGE);
-		return tf.newTransformer(new StreamSource(transformerName));
-	}
 
-	protected Transformer getSourceTransformer()
+	protected Transformer getTransformer()
 			throws TransformerFactoryConfigurationError, TransformerException {
 		log.debug("Inicializando translet basado en xsl: {}", transformerName);
-		TransformerFactory tf = TransformerFactory.newInstance();
-		return tf.newTransformer(new CatastroUriResolver().resolve("/stylesheets/" + transformerName + ".xsl",""));
-		//return tf.newTransformer(new StreamSource(getClass().getResourceAsStream("/stylesheets/" + transformerName + ".xsl")));
+		return TransformersCache.getInstance().getTransformer(transformerName);
 	}
 
 	private void loadUriResolver(FopFactory fopFactory) {
