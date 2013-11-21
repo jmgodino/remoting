@@ -6,7 +6,6 @@ import java.io.InputStream;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
 
@@ -75,11 +74,8 @@ public class TransletProcessor {
 
 	}
 
-
-
-	protected Transformer getTransformer()
-			throws TransformerFactoryConfigurationError, TransformerException {
-		log.debug("Inicializando translet basado en xsl: {}", transformerName);
+	protected Transformer getTransformer() throws TransformerException {
+		log.debug("Recuperando translet basado en la xsl: {}", transformerName);
 		return TransformersCache.getInstance().getTransformer(transformerName);
 	}
 

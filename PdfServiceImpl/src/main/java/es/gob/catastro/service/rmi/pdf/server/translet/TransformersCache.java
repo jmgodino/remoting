@@ -24,13 +24,8 @@ public class TransformersCache {
 		return cache;
 	}
 
-	/**
-	 * This method is synchronized because the Templates object is not thread safe.
-	 * @param transformerName
-	 * @return
-	 * @throws TransformerException
-	 */
-	public synchronized Transformer getTransformer(String transformerName)
+
+	public Transformer getTransformer(String transformerName)
 			throws TransformerException {
 		Templates current = dictionary.get(transformerName);
 		if (current == null) {

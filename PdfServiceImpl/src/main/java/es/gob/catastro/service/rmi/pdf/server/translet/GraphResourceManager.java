@@ -5,6 +5,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public class GraphResourceManager {
 
 	private static final int BUFFER_SIZE = 500000;
 
-	private Map<String, byte[]> map = new HashMap<String, byte[]>();
+	private Map<String, byte[]> map = Collections.synchronizedMap(new HashMap<String, byte[]>());
 
 	private static GraphResourceManager singleton;
 
